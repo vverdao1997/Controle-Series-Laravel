@@ -11,7 +11,18 @@
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2 d-flex justify-content-between">
+        <a class="navbar navbar-expand-lg" href="{{ route('listar_series') }}">Home</a>
+        <!-- Só executa se estiver logado -->
+        @auth
+            <a class="text-danger" href="/sair">Sair</a>
+        @endauth
 
+         <!-- Só executa se não estiver logado -->
+         @guest
+         <a class="" href="/entrar">Entrar</a>
+         @endguest
+   </nav>
 	<div class="container">
 		<div class="jumbotron">
 			<h1>@yield('cabecalho')</h1>

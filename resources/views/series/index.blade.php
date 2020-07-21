@@ -12,7 +12,9 @@
 </div>
 @endif
 
-<a href="{{route("form_criar_serie")}}" class="btn btn-dark mb-2">Adicionar</a>
+@auth
+    <a href="{{route("form_criar_serie")}}" class="btn btn-dark mb-2">Adicionar</a>
+@endauth
 
 <ul class="list-group">
 	@foreach ($series as $serie)
@@ -21,22 +23,27 @@
 
         <div class="input-group w-50" hidden id="input-nome-serie-{{ $serie->id }}">
             <input type="text" class="form-control" value="{{ $serie->nome }}">
+            @auth
             <div class="input-group-append">
                 <button class="btn btn-primary" onclick="editarSerie({{ $serie->id }})">
                     <i class="fas fa-check"></i>
                 </button>
                 @csrf
             </div>
+            @endauth
         </div>
 
         <span class="d-flex">
+            @auth
             <button class="btn btn-info btn-sm mr-1" onclick="toggleInput('{{ $serie->id }}')">
                 <i class="fas fa-edit"></i>
             </button>
+            @endauth
             <a href="/series/{{ $serie->id }}/temporadas" class="btn btn-info btn-sm mr-1">
                 <i class="fas fa-external-link-alt"></i>
             </a>
 
+            @auth
             <form method="post" action="/series/remover/{{ $serie->id }}"
                   onsubmit=" return confirm('Tem Certeza que deseja excluir {{addslashes($serie->nome)}} ?')">
                 @csrf
@@ -45,6 +52,7 @@
                     <i class="far fa-trash-alt"></i>
                 </button>
             </form>
+            @endauth
         </span>
 
     </li>

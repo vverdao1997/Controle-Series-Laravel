@@ -8,10 +8,16 @@ use App\Serie;
 use App\Services\SerieService;
 use App\Temporada;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SeriesController extends Controller{
 
 	public function index(Request $request) {
+
+        /*if(!Auth::check()){
+            echo "Não Autenticado";
+            exit();
+        }*/
 
 		// echo $request->url(); //Captura toda a url
 		// echo "<br>";
